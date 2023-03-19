@@ -2,56 +2,35 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strings"
 )
 
+func getInitials(name string) (string, string) {
+	capped := strings.ToUpper(name)
+	nameArr := strings.Split(capped, " ")
+
+	var initials []string
+
+	for _, value := range nameArr {
+		initials = append(initials, value[:1])
+	}
+
+	if len(initials) > 1 {
+		return initials[0], initials[1]
+	}
+
+	return initials[0], "_"
+}
+
 func main() {
-	fmt.Println(printArray("cbac"))
+	fName, lName := getInitials("Sean")
+	fmt.Println(fName, lName)
 
-	cycleNames([]string{"Sean", "Programmer", "Cold"}, sayMyName)
-
-	showRadius(3.5)
-}
-
-func sayMyName(name string) {
-	if len(name) == 0 {
-		fmt.Println("Nothin to say...")
-	} else {
-		fmt.Printf("Wuz hannen, %v! \n", name)
-	}
-}
-
-func printArray(text string) string {
-	if len(text) == 0 {
-		return fmt.Sprintln("bitch ass nigga")
+	i := 0
+	for i < len(myList) {
+		fmt.Println(myList[i])
+		i++
 	}
 
-	textSlice := strings.Split(text, "")
-	myMap := make(map[string]uint8)
-	var result string
-
-	for i := 0; i < len(textSlice); i++ {
-		if myMap[textSlice[i]] == 0 {
-			myMap[textSlice[i]] = 1
-			continue
-		}
-
-		if myMap[textSlice[i]] == 1 {
-			result = fmt.Sprintf("the first repeated value is: %v", textSlice[i])
-			break
-		}
-	}
-
-	return result
-}
-
-func cycleNames(names []string, f func(string)) {
-	for i := 0; i < len(names); i++ {
-		f(names[i])
-	}
-}
-
-func showRadius(r float32) {
-	fmt.Println("Radius is: ", math.Pi*r*r)
+	sayHello("Sean The Programmer")
 }
